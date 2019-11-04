@@ -1,5 +1,6 @@
 package com.ComicBookStore.CheckOut;
 
+import com.ComicBookStore.Mail.Mail;
 import com.ComicBookStore.config.ConnectionUtility;
 import com.ComicBookStore.dao.CartDao;
 import com.ComicBookStore.dao.CartDaoImpl;
@@ -10,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +55,14 @@ public class CheckOutServlet extends HttpServlet {
         CartDao dao=new CartDaoImpl();       
         if(dao.addCart(cart))
         { 
-             out.print("Order Placed Successfully");
+            try {
+                out.print("Order Placed Successfully");
+                Mail email= new Mail();
+                email.sendMail("manan*****@gmail.com");
+            } catch (Exception ex) {
+                Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
         }
         else
         {

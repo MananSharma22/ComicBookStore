@@ -28,6 +28,7 @@
            for(Products x:li)
            {
               out.println("<div>");
+              out.println("<form action=Cart.jsp>");
               out.println("<table>");
               out.println("<tr>");
               out.println("<td>");
@@ -44,10 +45,21 @@
                     out.println("Product Id:"+x.getProductId()); out.println("<br>");
                  
                     out.println("Product Price:"+x.getProductPrice());
+                    
+                     %>
+                    
+                    <input type='hidden' name='ProductId' value=<%= x.getProductId() %>  > 
+                    <input type='hidden' name='ProductPrice' value=<%= x.getProductPrice() %> >
+                    <input type='hidden' name='ProductName' value=<%= x.getProductName() %> >                   
+                    <%
+
+                    
+                    out.println("<input type='submit' value='Buy Now'>");
                     out.println("</td>");
                     out.println("</tr>");  
-            
+                    
                out.println("</table>");
+               out.println("</form>");
               out.println("</div>");
            }
        %>

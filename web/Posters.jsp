@@ -19,31 +19,46 @@
           CategoryDaoImpl cdi=new CategoryDaoImpl();
           List<Products> li=new LinkedList();
           li=cdi.showPosters();
-           for(Products x:li)
-           {
+                 for(Products ls: li)
+          {
               out.println("<div>");
-              out.println("<table>");
+              out.println("<form action='Cart.jsp'>");
+              out.println("<table id='StyleDisplay'>");
+              
+              
               out.println("<tr>");
               out.println("<td>");
-              Double p=x.getImagePath();
+              Double p=ls.getImagePath();
               String path="images\\"+p+".jpg";
               out.println("<img src='"+path+"' alt='Product image' height=\"200\" width=\"200\">");
               out.println("</td>");
-                    
+           
+                            
+             
                     out.println("<td>");
-                    out.println("Product name:"+x.getProductName()); out.println("<br>"); 
-                    
-                    out.println("Product Category:"+x.getProductCategory()); out.println("<br>"); 
-                   
-                    out.println("Product Id:"+x.getProductId()); out.println("<br>");
+                    out.println("Product name:"+ls.getProductName()); out.println("<br>"); 
                  
-                    out.println("Product Price:"+x.getProductPrice());
+                    out.println("Product Category:"+ls.getProductCategory()); out.println("<br>"); 
+                   
+                    out.println("Product Id:"+ls.getProductId()); out.println("<br>");
+                 
+                    out.println("Product Price:"+ls.getProductPrice());
+                   
+                    %>
+                    
+                    <input type='hidden' name='ProductId' value=<%= ls.getProductId() %>  > 
+                    <input type='hidden' name='ProductPrice' value=<%= ls.getProductPrice() %> >
+                    <input type='hidden' name='ProductName' value=<%= ls.getProductName() %> >                   
+                    <%
+                    out.println("<input type='submit' value='Buy Now'>");
                     out.println("</td>");
                     out.println("</tr>");  
             
-               out.println("</table>");
+              out.println("</form>");      
+              out.println("</table>");      
               out.println("</div>");
-           }
+             
+          }
        %>
 
     </body>
